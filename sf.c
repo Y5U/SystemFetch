@@ -6,11 +6,30 @@
 #include <inttypes.h>
 #include <pwd.h>
 
-#include "uptime.h"
-
 /* help links:
  * https://www.tutorialspoint.com/unix_system_calls/sysinfo.htm
  */
+
+uint64_t getUptime(){
+        #ifdef __FreeBSD__
+		#include <time.h>
+                struct timespec time_spec;
+
+                if (clock_gettime(CLOCK_UPTIME_PRECISE, &time_spec) != 0)
+                	return 0;
+
+		uint64_t uptime = time_spec.tv_sec;
+
+		return uptime;
+	#elif __linux__
+		#include <sys/sysinfo.h>
+        	struct sysinfo sys;
+
+		sysinfo(&sys);
+		
+		return sys.uptime;
+	#endif
+}
 
 char *getSecondToken(char str[], const char delim[]) {
 	strtok(str, delim);
