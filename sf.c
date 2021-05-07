@@ -21,7 +21,7 @@ char *getOS(){
 	fgets(buff, 70, (FILE*)osr);
 	fclose(osr);
 
-	while (i < 63 && buff[pos + i - 1] != '\"') {
+	while (i < 63) {
 		if(buff[pos + i - 1] != '\"' && buff[pos + i - 1] != '\n') { res[i] = buff[pos + i - 1]; }
 		i++;
 	} res[i] = '\0';
