@@ -5,6 +5,7 @@
 #ifdef __linux__
   #include <sys/sysinfo.h>
 	struct sysinfo system;
+  sysinfo(&system);
 #endif
 #include <string.h>
 #include <pwd.h>
@@ -60,7 +61,6 @@ char *getRam(){
 
 int main(){
 	struct utsname name;
-	sysinfo(&system);
 	uname(&name);
 
 	printf("\033[1m\033[36m%s@\033[1m\033[37m%s\n", getUserName(),name.nodename);
