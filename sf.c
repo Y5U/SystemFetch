@@ -4,7 +4,6 @@
 #include <sys/utsname.h>
 #include <string.h>
 #include <inttypes.h>
-#include <pwd.h>
 
 /* help links:
  * https://www.tutorialspoint.com/unix_system_calls/sysinfo.htm
@@ -60,14 +59,6 @@ char *getOS(){
 	return res;
 }
 
-const char *getUserName() {
-  	uid_t uid = geteuid();
-  	struct passwd *pw = getpwuid(uid);
-
-  	if(pw) { return pw->pw_name; }
-	return "";
-}
-
 char *getRam(){
   	FILE *meminfo;
 	if(!(meminfo = fopen("/proc/meminfo", "r"))) { return "Unable to get memory stats"; }
@@ -87,10 +78,11 @@ int main(){
 	struct utsname name;
 	uname(&name);
 	
-	printf("\033[1m\033[36m%s@\033[1m\033[37m%s\n", getUserName(),name.nodename);
+	printf("\033[1m\033[36m%s@\033[1m\033[37m%s\n", getenv("USER"),name.nodename);
 	printf("\033[1m\033[36mos\t\033[0;37m%s\n", getOS());
 	printf("\033[1m\033[36mkernel\t\033[0;37m%s\n", name.release);
 	printf("\033[1m\033[36mshell\t\033[0;37m%s\n", getenv("SHELL"));
+	printf("\033[1m\033[36mterminal\t\033[0;37m%s\n", getenv("TERM"));
 	printf("\033[1m\033[36muptime\t\033[0;37m%"PRIu64"h %"PRIu64"m\n", getUptime()/60/60, getUptime()/60 % 60);
 	printf("\033[1m\033[36mmemory\t\033[0;37m%s\033[0m\n", getRam());
 
