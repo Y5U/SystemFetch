@@ -3,9 +3,9 @@
 #include <unistd.h>
 #include <sys/utsname.h>
 #ifdef __linux__
-  #include <sys/sysinfo.h>
+	#include <sys/sysinfo.h>
 	struct sysinfo system;
-  sysinfo(&system);
+	sysinfo(&system);
 #endif
 #include <string.h>
 #include <pwd.h>
