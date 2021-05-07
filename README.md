@@ -7,6 +7,7 @@ Another neofetch-like utility but this time it's fast.
 # Compile
 ```
 $ git clone https://github.com/Y5U/SystemFetch.git
+$ cd SystemFetch
 $ make
 # make install
 $ sf
