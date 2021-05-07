@@ -15,3 +15,7 @@ $ sf
 
 # Compatibility
 This is probably not very portable, though I am trying to make it. If you want to help, test it on your BSD or Linux distrobution and report any errors or issues.
+
+# TODO
+Add ascii art (maybe)
+add compatibility with freeBSD
