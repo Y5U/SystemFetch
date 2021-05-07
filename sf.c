@@ -12,8 +12,21 @@
  * https://www.tutorialspoint.com/unix_system_calls/sysinfo.htm
  */
 
+char *getSecondToken(char str[], const char delim[]) {
+	strtok(str, delim);
+	return strtok(NULL, delim);
+}
+
+void remove_all_chars(char* str, char c) {
+	char *pr = str, *pw = str;
+	while (*pr) {
+		*pw = *pr++;
+		pw += (*pw != c);
+	}
+	*pw = '\0';
+}
+
 char *getOS(){
-	int i = 0, pos = 6;
 	char buff[70], *res = malloc (sizeof (char) * 255);
 	FILE *osr;
 	if(!(osr = fopen("/etc/os-release", "r"))) { return "Unable to find OS"; }
@@ -21,10 +34,9 @@ char *getOS(){
 	fgets(buff, 70, (FILE*)osr);
 	fclose(osr);
 
-	while (i < 63) {
-		if(buff[pos + i - 1] != '\"' && buff[pos + i - 1] != '\n') { res[i] = buff[pos + i - 1]; }
-		i++;
-	} res[i] = '\0';
+	res = getSecondToken(buff, "=");
+	remove_all_chars(res, '\"');
+	remove_all_chars(res, '\n');
 	
 	return res;
 }
@@ -35,11 +47,6 @@ const char *getUserName() {
 
   	if(pw) { return pw->pw_name; }
 	return "";
-}
-
-char *getSecondToken(char str[], const char delim[]) {
-	strtok(str, delim);
-	return strtok(NULL, delim);
 }
 
 char *getRam(){
