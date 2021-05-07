@@ -21,4 +21,4 @@ This is probably not very portable, though I am trying to make it. If you want t
 
 # TODO
 * Add ascii art (maybe)
-* Add compatibility with freeBSD
+* Add memory compatibility with freeBSD
