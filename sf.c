@@ -2,7 +2,10 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/utsname.h>
-#include <sys/sysinfo.h>
+#ifdef __linux__
+  #include <sys/sysinfo.h>
+	struct sysinfo system;
+#endif
 #include <string.h>
 #include <pwd.h>
 
@@ -41,7 +44,8 @@ char *getSecondToken(char str[], const char delim[]) {
 }
 
 char *getRam(){
-	FILE *meminfo = fopen("/proc/meminfo", "r");
+  FILE *meminfo;
+	if(!(meminfo = fopen("/proc/meminfo", "r"))) { return "Unable to get memory stats"; }
 	char buff[255], buff2[255], *res = malloc (sizeof (char) * 255);
 
 	fgets(buff, 255, (FILE*)meminfo);
@@ -55,7 +59,6 @@ char *getRam(){
 }
 
 int main(){
-	struct sysinfo system;
 	struct utsname name;
 	sysinfo(&system);
 	uname(&name);
