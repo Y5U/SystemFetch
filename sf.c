@@ -82,7 +82,7 @@ int main(){
 	printf("\033[1m\033[36mos\t\033[0;37m%s\n", getOS());
 	printf("\033[1m\033[36mkernel\t\033[0;37m%s\n", name.release);
 	printf("\033[1m\033[36mshell\t\033[0;37m%s\n", getenv("SHELL"));
-	printf("\033[1m\033[36mterminal\t\033[0;37m%s\n", getenv("TERM"));
+	printf("\033[1m\033[36mterm\t\033[0;37m%s\n", getenv("TERM"));
 	printf("\033[1m\033[36muptime\t\033[0;37m%"PRIu64"h %"PRIu64"m\n", getUptime()/60/60, getUptime()/60 % 60);
 	printf("\033[1m\033[36mmemory\t\033[0;37m%s\033[0m\n", getRam());
 
