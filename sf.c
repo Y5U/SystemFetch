@@ -4,6 +4,11 @@
 #include <sys/utsname.h>
 #include <string.h>
 #include <inttypes.h>
+#ifdef __FreeBSD__
+	#include <time.h>
+#elif __linux__
+	#include <sys/sysinfo.h>
+#endif
 
 /* help links:
  * https://www.tutorialspoint.com/unix_system_calls/sysinfo.htm
@@ -11,7 +16,6 @@
 
 uint64_t getUptime(){
         #ifdef __FreeBSD__
-		#include <time.h>
                 struct timespec time_spec;
 
                 if (clock_gettime(CLOCK_UPTIME_PRECISE, &time_spec) != 0)
@@ -21,7 +25,6 @@ uint64_t getUptime(){
 
 		return uptime;
 	#elif __linux__
-		#include <sys/sysinfo.h>
         	struct sysinfo sys;
 
 		sysinfo(&sys);
