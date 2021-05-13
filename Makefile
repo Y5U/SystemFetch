@@ -3,3 +3,6 @@ sf: sf.c
 
 install:
 	cp sf /usr/bin
+
+clean:
+	rm -f sf
