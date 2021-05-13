@@ -48,9 +48,11 @@ void remove_all_chars(char* str, char c) {
 }
 
 char *getOS(){
-	char buff[70], *res = malloc (sizeof (char) * 255);
 	FILE *osr;
-	if(!(osr = fopen("/etc/os-release", "r"))) { return "Unable to find OS"; }
+	char buff[70], *res = malloc (sizeof (char) * 255);
+
+	if(!(osr = fopen("/etc/os-release", "r")))
+		{ return "Unable to find OS"; }
 
 	fgets(buff, 70, (FILE*)osr);
 	fclose(osr);
@@ -64,8 +66,10 @@ char *getOS(){
 
 char *getRam(){
   	FILE *meminfo;
-	if(!(meminfo = fopen("/proc/meminfo", "r"))) { return "Unable to get memory stats"; }
 	char buff[255], buff2[255], *res = malloc (sizeof (char) * 255);
+
+	if(!(meminfo = fopen("/proc/meminfo", "r"))) 
+		{ return "Unable to get memory stats"; }
 
 	fgets(buff, 255, (FILE*)meminfo);
 	fgets(buff2, 255, (FILE*)meminfo);
